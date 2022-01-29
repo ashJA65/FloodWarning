@@ -14,7 +14,7 @@ def stations_by_distance(stations, p):
     distance = 0 #working distance variable
 
     for i in stations:
-        distance = math.sqrt( (i.coord[0]-p[0])**2 + (i.coord[1]-p[1])**2 ) # perform pythag calculation on x and y distances from station to input cooord p
+        distance = # need to use haversine formula (see deliverables)
         outputList.append((i,distance))
     
     return outputList
