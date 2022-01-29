@@ -6,6 +6,9 @@ geographical data.
 
 """
 
+from haversine import haversine
+
+
 from .utils import sorted_by_key  # noqa
 
 def stations_by_distance(stations, p):
@@ -14,7 +17,9 @@ def stations_by_distance(stations, p):
     distance = 0 #working distance variable
 
     for i in stations:
-        distance = # need to use haversine formula (see deliverables)
+        distance = haversine(i.coord,p) 
         outputList.append((i,distance))
     
+    #todo: sort list by distance
+
     return outputList
