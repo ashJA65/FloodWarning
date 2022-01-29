@@ -20,6 +20,7 @@ def stations_by_distance(stations, p):
         distance = haversine(i.coord,p) 
         outputList.append((i,distance))
     
-    #todo: sort list by distance
+    outputList.sort(key=lambda y: y[1]) # should sort list by the second item of the tuple
+    #https://pythonguides.com/python-sort-list-of-tuples/
 
     return outputList
