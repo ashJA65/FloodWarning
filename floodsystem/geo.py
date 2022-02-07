@@ -12,7 +12,8 @@ from haversine import haversine
 from .utils import sorted_by_key  # noqa
 
 def stations_by_distance(stations, p):
-
+    """Take list of stations and a coordinate tuple and sort them by proximity to said coordinate"""
+    
     outputList =[] #will append results into this
     distance = 0 #working distance variable
 
