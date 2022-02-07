@@ -7,7 +7,7 @@ geographical data.
 """
 
 from haversine import haversine
-
+from pandas import RangeIndex
 
 from .utils import sorted_by_key  # noqa
 
@@ -71,3 +71,27 @@ def stations_within_radius(stations, centre, r):
             stationsInCircle.append(i)  # append station into output list if it is within the circle
 
     return stationsInCircle
+
+def rivers_by_station_number(stations, N):
+    s0 = {}
+    riverlist = []
+    n = 0
+        
+    for station in stations:
+        riverlist.append(station.river)
+
+    for i in RangeIndex(len(riverlist)):
+        n = 0
+        current_river = ""
+        for river in riverlist:
+            if river == riverlist[i]:
+                current_river = river
+                n = n + 1
+        if n >= 1:
+            s0[current_river] = n
+
+    print(s0)
+    sorted_values = sorted(s0.values())
+    sorted_s0 = {}
+
+    #sort s0 in value order and return the N highest vales as a list
