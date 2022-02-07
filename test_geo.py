@@ -6,12 +6,16 @@ def test_stations_by_distance():
                                      measure_id='station1',
                                      label='station1',
                                      coord=(6, 3),
-                                     typical_range=(0, 1))
+                                     typical_range=(0, 1),
+                                     river='river1',
+                                     town='town1')
     station2 = MonitoringStation(station_id='station2',
                                      measure_id='station2',
                                      label='station2',
                                      coord=(0, 1),
-                                     typical_range=(0, 1))
+                                     typical_range=(0, 1),
+                                     river='river2',
+                                     town='town2')
     stations=[station1,station2]
     stationsSorted = stations_by_distance(stations, (0,0))
 it
