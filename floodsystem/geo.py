@@ -59,3 +59,15 @@ def stations_by_river(stations):
   return (a,b,c)# sends a list of list back to the line that called this function in this case t from Task1d
 
 #test comment
+def stations_within_radius(stations, centre, r):
+    """Take list of stations, coordintate tuple and radius and return a list of all stations within that circle"""
+
+    stationsInCircle=[] # blank list to append in to
+
+    for i in stations:
+
+        if haversine(i.coord,centre) < r: # calculate distance from station to centre of circle
+
+            stationsInCircle.append(i)  # append station into output list if it is within the circle
+
+    return stationsInCircle
