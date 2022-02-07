@@ -13,7 +13,7 @@ from .utils import sorted_by_key  # noqa
 
 def stations_by_distance(stations, p):
     """Take list of stations and a coordinate tuple and sort them by proximity to said coordinate"""
-    
+
     outputList =[] #will append results into this
     distance = 0 #working distance variable
 
@@ -25,6 +25,7 @@ def stations_by_distance(stations, p):
     #https://pythonguides.com/python-sort-list-of-tuples/
 
     return outputList
+<<<<<<< HEAD
     
 from sqlalchemy import null
 from .utils import sorted_by_key  # noqa
@@ -59,3 +60,13 @@ def stations_by_river(stations):
   return (a,b,c)# sends a list of list back to the line that called this function in this case t from Task1d
 
 
+=======
+
+def stations_within_radius(stations, centre, r):
+    """Take list of stations, coordintate tuple and radius and return a list of all stations within that circle"""
+    stationsInCircle=[] # blank list to append in to
+    for i in stations:
+        if haversine(i.coord,centre) < r: # calculate distance from station to centre of circle
+            stationsInCircle.append(i)  # append station into output list if it is within the circle
+    return r
+>>>>>>> dcc93a9031f44e968b3ffe76631bc8496ae8f60d
