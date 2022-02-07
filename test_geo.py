@@ -30,25 +30,25 @@ def test_stations_within_radius():
     station1 = MonitoringStation(station_id='station1',
                                      measure_id='station1',
                                      label='station1',
-                                     coord=(20, 20),
+                                     coord=(52.208096, -0.112962),
                                      typical_range=(0, 1),
                                      river='river1',
                                      town='town1')
     station2 = MonitoringStation(station_id='station2',
                                      measure_id='station2',
                                      label='station2',
-                                     coord=(20, -20),
+                                     coord=(52.208096, 0.112962),
                                      typical_range=(0, 1),
                                      river='river2',
                                      town='town2')
     stations=[station1,station2]
 
-    testCentre=(21,21)
+    testCentre=(52.208490, 0.120794)
 
     #pick out stations within 10km of testCentre
     stationsInRadius= stations_within_radius(stations,testCentre,10)
-
+    
     #Assert that only 1 station is within the radius
-    assert stationsInRadius.len() == 1
+    assert len(stationsInRadius) == 1
     #Assert that the station in the radius is station1
-    assert stationsInRadius[0].label == 'station2'
+    assert stationsInRadius[0].name == 'station2'
