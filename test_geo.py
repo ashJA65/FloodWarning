@@ -18,7 +18,6 @@ def test_stations_by_distance():
                                      town='town2')
     stations=[station1,station2]
     stationsSorted = stations_by_distance(stations, (0,0))
-it
     assert stationsSorted[0][0].station_id == 'station2' # check first station in list is closest 
 
     assert stationsSorted[1][0].station_id == 'station1' # check second station is further away
