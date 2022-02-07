@@ -49,4 +49,4 @@ def inconsistent_typical_range_stations(stations):
     """ This returns a list of stations that are not consistent from an input list of stations"""
 
     # iterates through stations, and returns a list of those which are inconsistent
-    return [ i for i in stations if i.typical_range_consistent == False ] 
+    return [ i for i in stations if i.typical_range_consistent() == False ] 
