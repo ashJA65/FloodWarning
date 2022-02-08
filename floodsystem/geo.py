@@ -34,9 +34,7 @@ def rivers_with_station(stations):
 
   s = []# instanciate a new list variable with its value(s) set to null
   for station in stations:#this loops through the stations list for refrence each station its a container with its own variables
-    river= station.river # obtains river from the station
-    if river not in s:    # checking for duplicates
-      s.append(station.river)# adds the name of the river to s
+    s.append(station.river)# adds the name of the river to s
   a = set(s)# converts s into the list a
   return(a)# sends a list back to the line that called this function in this case s from Task1d
     
