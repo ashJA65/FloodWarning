@@ -30,6 +30,8 @@ from sqlalchemy import null
 from .utils import sorted_by_key  # noqa
 
 def rivers_with_station(stations):
+  """Function that returns a tuple containing stations with a certain river"""
+
   s = []# instanciate a new list variable with its value(s) set to null
   for station in stations:#this loops through the stations list for refrence each station its a container with its own variables
     s.append(station.river)# adds each of the river names to the list a for every station
@@ -73,6 +75,8 @@ def stations_within_radius(stations, centre, r):
     return stationsInCircle
 
 def rivers_by_station_number(stations, N):
+    "Function that returns a list of tuples containing the river name and the number of stations it has"
+    
     s0 = {}
     riverlist = []
     n = 0
