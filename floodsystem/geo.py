@@ -73,10 +73,11 @@ def stations_within_radius(stations, centre, r):
     return stationsInCircle
 
 def rivers_by_station_number(stations, N):
+    p=[]
     s0 = {}
     riverlist = []
     n = 0
-        
+    N=N
     for station in stations:
         riverlist.append(station.river)
 
@@ -88,10 +89,17 @@ def rivers_by_station_number(stations, N):
                 current_river = river
                 n = n + 1
         if n >= 1:
-            s0[current_river] = n
+            p.append(tuple((current_river,n)))
+    v=set((p))
+    
+    v1 = list(v)
+    v2=sorted(v1, key=lambda tup: -tup[1])
+    v3 = []
+    for i in RangeIndex(N):
+      v3.append(v2[i])
+    return (v3)
 
-    print(s0)
-    sorted_values = sorted(s0.values())
-    sorted_s0 = {}
 
     #sort s0 in value order and return the N highest vales as a list
+
+    
