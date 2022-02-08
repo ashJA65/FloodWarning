@@ -1,4 +1,4 @@
-from floodsystem.geo import stations_by_distance, stations_within_radius
+from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station
 from floodsystem.station import MonitoringStation
 from pandas import RangeIndex
 
@@ -131,3 +131,32 @@ def test_stations_by_river():
 
 
 assert  
+def test_rivers_with_stations():
+    station1 = MonitoringStation(station_id='sta1',
+                                     measure_id='sta1',
+                                     label='Test Station 1',
+                                     coord=(0., 1.),
+                                     typical_range=(0., 1.),
+                                     river='river1',
+                                     town='test_town_1')
+    station2 = MonitoringStation(station_id='sta2',
+                                     measure_id='sta2',
+                                     label='Test Station 2',
+                                     coord=(1., 1.),
+                                     typical_range=(0., 1.),
+                                     river='river1',
+                                     town='test_town_2')
+    station3 = MonitoringStation(station_id='sta3',
+                                     measure_id='sta3',
+                                     label='Test Station 3',
+                                     coord=(10., 10.),
+                                     typical_range=(0., 1.),
+                                     river='river2',
+                                     town='test_town_3')
+
+    stations = [station1, station2, station3]
+    rivers = rivers_with_station(stations)
+
+    assert len(rivers) == 2
+    assert 'river1' in rivers
+    assert 'river2' in rivers

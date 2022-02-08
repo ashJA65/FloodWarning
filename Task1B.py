@@ -12,8 +12,11 @@ def run():
 
     # print 10 closest stations
     for i in distances[:10]:
-        print (i[0].name, i[0].town, i[1])
+        print ((i[0].name, i[0].town, i[1]))
 
+    # Newline for readability
+    print("\n")
+    
     # print 10 furthest stations
     for i in distances[-10:]:
         print ((i[0].name, i[0].town, i[1]))
