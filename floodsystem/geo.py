@@ -6,8 +6,10 @@ geographical data.
 
 """
 
+from pickle import TRUE
 from haversine import haversine
 from pandas import RangeIndex
+from collections import Counter
 
 from .utils import sorted_by_key  # noqa
 
@@ -75,35 +77,17 @@ def stations_within_radius(stations, centre, r):
     return stationsInCircle
 
 def rivers_by_station_number(stations, N):
-    p=[]
-    "Function that returns a list of tuples containing the river name and the number of stations it has"
-    
-    s0 = {}
-    riverlist = []
-    n = 0
-    N=N
-    for station in stations:
-        riverlist.append(station.river)
-
-    for i in RangeIndex(len(riverlist)):
-        n = 0
-        current_river = ""
-        for river in riverlist:
-            if river == riverlist[i]:
-                current_river = river
-                n = n + 1
-        if n >= 1:
-            p.append(tuple((current_river,n)))
-    v=set((p))
-    
-    v1 = list(v)
-    v2=sorted(v1, key=lambda tup: -tup[1])
-    v3 = []
-    for i in RangeIndex(N):
-      v3.append(v2[i])
-    return (v3)
-
-
-    #sort s0 in value order and return the N highest vales as a list
-
-    
+  riverlist = []
+  c=0
+  for station in stations:
+    riverlist.append(station.river)
+  drivstat = Counter(riverlist)
+  rivstat = drivstat.items()
+  sortrivstat = sorted(rivstat,key=lambda x: x[1], reverse=TRUE)
+  rivnum = [item[1] for item in sortrivstat]
+  last = N - 1
+  lastval = rivnum[last]
+  for x in range(len(rivnum)):
+    if rivnum[x] >= lastval:
+      c +=1
+  return sortrivstat[:c]
