@@ -130,7 +130,7 @@ def test_stations_by_river():
                                      town='town4')
 
 
-assert  
+
 def test_rivers_with_stations():
     station1 = MonitoringStation(station_id='sta1',
                                      measure_id='sta1',
