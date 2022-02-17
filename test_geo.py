@@ -89,11 +89,10 @@ def test_rivers_by_station_number():
         
 
         stations=[station1,station2,station3,station4] 
-        
-
-        assert rivers_by_station_number(station1,1) == [('river1' , 1)]
-        #assert rivers_by_station_number(station1,station2, station3, 1) == {"river2": 2}
-        #assert rivers_by_station_number([station1,station2, station3], 2) == {"river2": 2, "river1": 1}
+        N=2
+        outputr = rivers_by_station_number(stations, N)
+        assert outputr == [('river2', 2),('river1', 1)]
+       
 
 
 from floodsystem.geo import stations_by_river
