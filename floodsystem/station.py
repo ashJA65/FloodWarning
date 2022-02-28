@@ -45,6 +45,25 @@ class MonitoringStation:
 
         return type(self.typical_range) is tuple and self.typical_range != (0,0) and self.typical_range[0] < self.typical_range[1]
 
+    def relative_water_level(self):
+        """return water level as fraction of the typical range"""
+
+        #default case if data is not avaliable or inconsistent
+        relative_level = None
+
+        if self.typical_range_consistent():
+            try:
+                #should only work if data is consistent and avaliable
+                relative_level = (self.latest_level - self.typical_range[0]) / (
+                    self.typical_range[1] - self.typical_range[0])
+            except:
+                #if data is consistent but not avaliable
+                relative_level = None
+        
+        return relative_level
+
+
+
 def inconsistent_typical_range_stations(stations):
     """ This returns a list of stations that are not consistent from an input list of stations"""
 
