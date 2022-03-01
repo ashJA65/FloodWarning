@@ -10,6 +10,7 @@ from pickle import TRUE
 from haversine import haversine
 from pandas import RangeIndex
 from collections import Counter
+from functools import reduce
 
 from .utils import sorted_by_key  # noqa
 
@@ -41,26 +42,20 @@ def rivers_with_station(stations):
   return(a)# sends a list back to the line that called this function in this case s from Task1d
     
 def stations_by_river(stations):
-  a = []# instanciate a new list variable with its value(s) set to null
-  b = []# instanciate a new list variable with its value(s) set to null
-  c = []# instanciate a new list variable with its value(s) set to null
+    """Returns a Python dict (dictionary) that maps river names (the ‘key’)
+    to a list of stations on that given river."""
 
-  for station in stations:#this loops through the stations list for refrence each station its a container with its own variables
-    if(station.river == "River Aire"):#check to see if the river name is equvalent to "River Aire"
-      a.append(station.name)# adds each of the stations names to the list a if the if statement condition is true
-  a.sort()#sorts out the list in an alphabetical order
+    # Create the dictionary of river->[station] to be returned
+    ans = {}
+    for station in stations:
+        if (station.river not in ans):
+            # Create a new list for a not existing river
+            ans[station.river] = []
+        ans[station.river].append(station.name)
+        ans[station.river].sort()
+    return ans
 
-  for station in stations:#this loops through the stations list for refrence each station its a container with its own variables      
-    if(station.river == "River Cam"):#check to see if the river name is equvalent to "River Cam"
-      b.append(station.name)# adds each of the stations names to the list b if the if statement condition is true
-  b.sort()#sorts out the list in an alphabetical order
 
-  for station in stations:#this loops through the stations list, for refrence each station is a container with its own variables      
-    if(station.river == "River Thames"):#check to see if the river name is equvalent to "River Thames"
-      c.append(station.name)# adds each of the stations names to the list c if the if statement condition is true
-  c.sort()#sorts out the list in an alphabetical order
-
-  return (a,b,c)# sends a list of list back to the line that called this function in this case t from Task1d
 
 
 def stations_within_radius(stations, centre, r):
@@ -77,17 +72,24 @@ def stations_within_radius(stations, centre, r):
     return stationsInCircle
 
 def rivers_by_station_number(stations, N):
-  riverlist = []
-  c=0
-  for station in stations:
-    riverlist.append(station.river)
-  drivstat = Counter(riverlist)
-  rivstat = drivstat.items()
-  sortrivstat = sorted(rivstat,key=lambda x: x[1], reverse=TRUE)
-  rivnum = [item[1] for item in sortrivstat]
-  last = N - 1
-  lastval = rivnum[last]
-  for x in range(len(rivnum)):
-    if rivnum[x] >= lastval:
-      c +=1
-  return sortrivstat[:c]
+    """Determines the N rivers with the greatest number of monitoring stations.
+    It returns a list of (river name, number of stations) tuples,
+    sorted by the number of stations.
+    In the case that there are more rivers with the same number of stations as the N th entry,
+    these rivers are included in the list."""
+
+    # First, get a complete list of (river name, number of stations) tuples
+    complete_list = []
+    stations_on_river = stations_by_river(stations)
+    for river in stations_on_river:
+        complete_list.append((river, len(stations_on_river[river])))
+
+    # Now sort it by numbers of stations in descending order
+    complete_list = sorted_by_key(complete_list, 1, reverse=True)
+    # The threshold value: the N-th greatest value
+    threshold = complete_list[N - 1][1]
+    greatest_N = []
+    for river in complete_list:
+        if river[1] >= threshold:
+            greatest_N.append((river))
+    return greatest_N

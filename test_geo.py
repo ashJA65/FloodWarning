@@ -1,5 +1,6 @@
 from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station
 from floodsystem.station import MonitoringStation
+from floodsystem.stationdata import build_station_list
 from pandas import RangeIndex
 
 """unit test for the geo module"""
@@ -55,46 +56,6 @@ def test_stations_within_radius():
     assert stationsInRadius[0].name == 'station2'
 
 from floodsystem.geo import rivers_by_station_number
-def test_rivers_by_station_number():
-        
-        station1 = MonitoringStation(station_id='station1',
-                                     measure_id='station1',
-                                     label='station1',
-                                     coord=(52.208096, -0.112962),
-                                     typical_range=(0, 1),
-                                     river='river1',
-                                     town='town1')
-        station2 = MonitoringStation(station_id='station2',
-                                     measure_id='station2',
-                                     label='station2',
-                                     coord=(47.245091, 8.114722),
-                                     typical_range=(0, 1),
-                                     river='river2',
-                                     town='town2')
-        station3 = MonitoringStation(station_id='station3',
-                                     measure_id='station3',
-                                     label='station3', 
-                                     coord=(-2.208096, 9.638102),                                
-                                     typical_range=(0, 1),
-                                     river='river2',
-                                     town='town3')
-        station4 = MonitoringStation(station_id='station4',
-                                     measure_id='station4',
-                                     label='station4', 
-                                     coord=(22.208096, 9.638102),                                
-                                     typical_range=(0, 1),
-                                     river='river3',
-                                     town='town4')
-                                    
-        
-
-        stations=[station1,station2,station3,station4] 
-        N=2
-        outputr = rivers_by_station_number(stations, N)
-        assert outputr == [('river2', 2),('river1', 1)]
-       
-
-
 from floodsystem.geo import stations_by_river
     
 def test_stations_by_river():
@@ -159,3 +120,10 @@ def test_rivers_with_stations():
     assert len(rivers) == 2
     assert 'river1' in rivers
     assert 'river2' in rivers
+
+def test_rivers_by_station_number():
+
+    # Build a list of staions
+    stations = build_station_list()
+    ans = rivers_by_station_number(stations, 9)
+    assert len(ans) >= 9
