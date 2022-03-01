@@ -16,12 +16,13 @@ def run():
     #get 5 highest water level stations over the past 5 days
     highest_stations = stations_highest_rel_level(stations, 5)
 
-    for i in highest_stations:
-        station = i[0] #extract station object out of tuple
+    for station in highest_stations:
+        
         dt = 10
         #get data from past 10 days
         dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
         plot_water_levels(station, dates, levels)
+        print("Relative water level of " + station.name + ": " + str(station.relative_water_level()))
 
 if __name__ == "__main__":
     print("*** Task 2E: plot water level  ***")

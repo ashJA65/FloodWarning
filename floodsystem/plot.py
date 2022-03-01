@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 import numpy as np
 
 from datetime import datetime, timedelta
-from floodsystem.analysis import polyfit
 from matplotlib.dates import date2num
 
 
@@ -25,4 +24,8 @@ def plot_water_levels(station, dates, levels):
     plt.ylabel('water level (m)')
     plt.title(station.name)
     plt.tight_layout()
+
+    if len(levels) == 0:
+        plt.text(0,0.1,"NO DATA",fontsize=12,backgroundcolor="red")
+       
     plt.show()
