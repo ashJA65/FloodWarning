@@ -17,6 +17,6 @@ def test_stations_polyfit():
 
         p, d0 = polyfit(dates,levels,3)
         assert round(p[2]) == 16
-        assert d0 == 2  
+        assert d0 == 10
 
         
