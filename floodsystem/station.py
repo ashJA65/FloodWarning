@@ -11,7 +11,7 @@ class MonitoringStation:
     """This class represents a river level monitoring station"""
 
     def __init__(self, station_id, measure_id, label, coord, typical_range,
-                 river, town):
+                 river, town, risk="NA"):
 
         self.station_id = station_id
         self.measure_id = measure_id
@@ -28,6 +28,7 @@ class MonitoringStation:
         self.town = town
 
         self.latest_level = None
+        self.risk= risk
 
     def __repr__(self):
         d = "Station name:     {}\n".format(self.name)
@@ -62,6 +63,8 @@ class MonitoringStation:
         
         return relative_level
 
+    def set_risk(self, risk):
+        self.risk = risk
 
 
 def inconsistent_typical_range_stations(stations):
