@@ -4,9 +4,9 @@ from floodsystem.geo import rivers_by_station_number
 import floodsystem.datafetcher
 
 def run():
-    N = 9
+    
     stations = build_station_list()
-    return print(rivers_by_station_number(stations, N))
+    print("\n"+str(rivers_by_station_number(stations,10))+"\n")
     
 
 if __name__ == "__main__":
