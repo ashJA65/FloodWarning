@@ -67,3 +67,31 @@ def test_inconsistent_typical_range_stations():
     assert inconsistent_typical_range_stations([station1]) == []
     assert inconsistent_typical_range_stations([station1, station2]) == [station2]
     assert inconsistent_typical_range_stations([station2, station3]) == [station2, station3]
+
+def test_relative_water_level():
+        station1 = MonitoringStation(station_id='test1',
+                                     measure_id='test2',
+                                     label='test1',
+                                     coord=(5,6),
+                                     typical_range=(0., 1.),
+                                     river='test1',
+                                     town='test1')
+        station2 = MonitoringStation(station_id='test2',
+                                     measure_id='test2',
+                                     label='test2',
+                                     coord=(1., 1.),
+                                     typical_range=(1., 0.),
+                                     river='test2',
+                                     town='test2')
+        assert station1.relative_water_level() is None
+        station1.latest_level = 0.
+        assert station1.relative_water_level() == 0.
+        station1.latest_level = 1.
+        assert station1.relative_water_level() == 1.
+        station1.latest_level = 0.5
+        assert station1.relative_water_level() == 0.5
+        station1.latest_level = 2.
+        assert station1.relative_water_level() == 2.
+
+        station2.latest_level = 0.5
+        assert station2.relative_water_level() is None
