@@ -15,7 +15,8 @@ def run():
 
     # Station name to find
     station_name = "Cam"
-
+    station_name = "Henley River" #uncomment to get a working station
+    #station_name = "Letcombe Bassett"  
     # Find station
     station_cam = None
     for station in stations:
@@ -24,9 +25,11 @@ def run():
             break
 
     # Check that station could be found. Return if not found.
-    if not station_cam:
+    if station_cam == None:
         print("Station {} could not be found".format(station_name))
         return
+    else:
+        print("Station {} was found".format(station_name))
 
     # Alternative find station 'Cam' using the Python 'next' function
     # (https://docs.python.org/3/library/functions.html#next). Raises
