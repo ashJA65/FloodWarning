@@ -23,3 +23,14 @@ def level_is_rising(poly, d0, dates):
     else:
         return False
 
+def get_risk(rising, rel_level):
+    """Determines the threat level from relative level and whether it is rising or falling"""
+    if rel_level >= 1 and rising or rel_level >= 1.5:
+        threat = "Severe"
+    elif rel_level >= 0.75 and rising or rel_level >=1 and not rising:
+        threat = "High"
+    elif rel_level >= 0.75 and not rising or rel_level >= 0.5 and rising:
+        threat = "Moderate"
+    else:
+        threat = "Low"
+    return threat
