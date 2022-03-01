@@ -57,7 +57,7 @@ class MonitoringStation:
                 relative_level = (self.latest_level - self.typical_range[0]) / (
                     self.typical_range[1] - self.typical_range[0])
             except:
-                #if data is consistent but not avaliable
+                #if data is consistent but not
                 relative_level = None
         
         return relative_level
