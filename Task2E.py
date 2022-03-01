@@ -20,9 +20,15 @@ def run():
         
         dt = 10
         #get data from past 10 days
-        dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
-        plot_water_levels(station, dates, levels)
-        print("Relative water level of " + station.name + ": " + str(station.relative_water_level()))
+        
+        try:
+            dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
+            plot_water_levels(station, dates, levels)
+            print("Relative water level of " + station.name + ": " + str(station.relative_water_level()))
+        except IndexError:
+            print("{} station level data missing, skipping...".format(station.name))
+            continue
+        
 
 if __name__ == "__main__":
     print("*** Task 2E: plot water level  ***")
