@@ -14,3 +14,25 @@ def stations_level_over_threshold(stations, tol):
 
     flooded_stations.sort(key=lambda x: x[1], reverse=True) # sort list by relative level in descending order
     return flooded_stations
+
+def stations_highest_rel_level(stations, N):
+    """
+    Return a list of N stations
+    Each station has the highest water level relative to the typical range.
+    The list is sorted in descending order by relative level
+    """
+
+    stations_rel_level = [] #blank list to append to
+
+    for station in stations:
+        
+        relative_level = station.relative_water_level()
+
+        # only append if relative level is present
+        if relative_level != None:
+            stations_rel_level.append(station)
+
+        stations_rel_level.sort(key=lambda x: x. relative_water_level() , reverse=True) #sort in descending order by rel water level
+        flooded_stations = stations_rel_level[:N] # return N stations in list (cropping)
+
+    return flooded_stations
